@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { FilteredQuestions } from './Types/quizQuestionTYpes'
 import { getQuestions } from './Services/quizServices'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { QuestionCard } from "./Components/QuestionCard/questionCard"
 import { ResultCard } from "./Components/ResultCard/index"
 import Swal from 'sweetalert2'
