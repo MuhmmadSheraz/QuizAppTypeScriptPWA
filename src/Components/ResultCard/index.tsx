@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./resultCard.css";
 import { resultScore } from "../../Types/quizQuestionTYpes";
+
 import App from '../../App'
 export const ResultCard: React.FC<resultScore> = ({ score, totalQuestion }) => {
+  
   const [startQuiz, setStartQuiz] = useState<Boolean>(false)
   if (startQuiz) return <App />
   return (
