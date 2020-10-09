@@ -6,8 +6,8 @@ import { QuestionCard } from "./Components/QuestionCard/questionCard"
 import { ResultCard } from "./Components/ResultCard/index"
 import firebase from "./firebase"
 import Swal from 'sweetalert2'
-  import axios from "axios"
-  
+import axios from "axios"
+
 
 function App() {
   let [iteration, setIterations] = useState(0)
@@ -21,28 +21,29 @@ function App() {
     setAllQuestions(data)
   }
   useEffect(() => {
-     const askForPermissioToReceiveNotifications = async () => {
-      try {
-        const messaging = firebase.messaging();
-        await messaging.requestPermission();
-        const token = await messaging.getToken();
-        console.log("Token===>", token);
-        
-        return token;
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    console.log("permision asked")
     askForPermissioToReceiveNotifications()
   }, [])
+  const askForPermissioToReceiveNotifications = async () => {
+    try {
+      const messaging = firebase.messaging();
+      await messaging.requestPermission();
+      const token = await messaging.getToken();
+      console.log("Token===>", token);
+
+      return token;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   let body = {
     notification: {
-      title: "Firebase",
-      body: "Kia Kehny Qibla",
+      title: "Quiz App ",
+      body: "Wanna Start Quiz",
       icon: "http://url-to-an-icon/icon.png",
     },
     to:
-      "fXkL4tYeslJhuGBFDwx7ZQ:APA91bGfO-qfEg4V8Q7LIWpEP-88DpIj8QMPVx4OdGMqltJcl5nvRHFSgfYocMZNmk7BDdjCeYgUKdBKmUznAMBrYDfU41_Qk2YLT417KwSHDfj95rQp2gQH6oysQfRAjDaD7elItWPU",
+      "fXkL4tYeslJhuGBFDwx7ZQ:APA91bEOksMRSsdXXNUwCQc4ZU48yzjP_367yZYEVYFGQVeGUecE6TCaliW4YgLxi_YdExSqaOWrGPIXnMQho_uWbbUZqL7ASNLfX3JeuW8MlJWrWA_r6_bhyhzhY0_hDJen1Zgyvgrz",
   };
   const checkNoti = () => {
     axios({
@@ -61,22 +62,15 @@ function App() {
   };
   useEffect(() => {
     fetchindData()
-    const msg = firebase.messaging()
-    msg.requestPermission().then(() => {
-      return msg.getToken()
-    }).then(data=>{
-      console.log("Token *****",data)
-    })
-    return (()=>{
-      
-    })
+    
   }, [])
-useEffect(() => {
-  console.log("hello")
-  checkNoti()
-  return () => {
-    checkNoti()  }
-}, [])
+  useEffect(() => {
+    console.log("hello")
+    checkNoti()
+    return () => {
+      checkNoti()
+    }
+  }, [])
   const nextQuestion = (userAnswer: string) => {
     console.log("user Input", userAnswer)
     // changeIndex()
@@ -129,6 +123,7 @@ useEffect(() => {
       <div className="mainWrapper">
         <div className="content_main">
           <p className="headerheading">Welcome To Quiz </p>
+          
           <button className="startBtn rounded-pill" onClick={startTheQuiz}> StartQuiz</button>
         </div>
       </div >
